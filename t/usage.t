@@ -68,15 +68,6 @@ untaint(@elem);
 ok !tainted($_) => "array elem tainted" for @elem;
 
 #
-# Hash keys can't be tainted
-#
-
-my %hv = qw(a b c d);
-taint(%hv);
-ok tainted($_) => "Hash value $_ tainted" for values %hv;
-ok !tainted($_) => "Hash key $_ untainted" for keys %hv;
-
-#
 # Tainting references
 #
 
@@ -148,6 +139,28 @@ taint(my $str = "bewbs");
 ok tainted($str) => "New scalar tainted";
 my $re = qr/$str/;
 ok tainted($re) => "qr// tainted";
+
+#
+# Hash keys can't be tainted
+#
+
+local $@;
+my %hv = qw(a b c d);
+
+eval {
+    taint(%hv);
+    ok tainted($_) => "Hash value $_ tainted" for values %hv;
+    ok !tainted($_) => "Hash key $_ untainted" for keys %hv;
+};
+
+SKIP: {
+    if ($@)
+    {
+        chomp(my $err = $@);
+        my $num = 2 * scalar keys %hv;
+        skip "perl 5.8.5, 5.8.7 (not 5.8.8) and probably some other version die on this test with: $err", $num;
+    }
+};
 
 __DATA__
 bax
