@@ -1,0 +1,32 @@
+2007-05-09 Ævar Arnfjörð Bjarmason <avar@cpan.org> (0.05)
+
+	* t/reftaint.t: Specify how many tests are planned
+	* Util.pm: Don't inherit from Exporter
+	* Util.pm: POD: "used by perl" => "used by perl internally"
+
+2007-03-21 Ævar Arnfjörð Bjarmason <avar@cpan.org> (0.04)
+
+	* t/usage.t: Test for qr// taintness
+	* t/reftaint.t: Test tainting of stringified objects
+	* Util.pm: Section in taint/untaint explaining qr// and taintness
+  	of stringified objects
+	* Util.pm: Minor rewording in POD
+	* ChangeLog: s/Usage\.(pm|xs)/Util.$1/g
+	
+2007-03-17 Ævar Arnfjörð Bjarmason <avar@cpan.org> (0.03)
+
+	* t/usage.t: A lot more tests
+	* t/prototype.t: New tests for prototypes
+	* Util.xs: Support multiple arguments to taint/untaint
+	* Util.pm: Expanded a lot on the documentation
+	
+2007-03-14 Ævar Arnfjörð Bjarmason <avar@cpan.org> (0.02)
+	
+	* Util.pm: Re-worded and added to the POD
+	* ChangeLog: Added a changelog file
+	* Makefile.PL: Explicitly get version from Util.pm
+
+2007-03-14 Ævar Arnfjörð Bjarmason <avar@cpan.org> (0.01)
+	
+	* Initial release
+	
