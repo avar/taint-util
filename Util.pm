@@ -1,10 +1,21 @@
 package Taint::Util;
-use Exporter 'import';
 use XSLoader ();
 
 $VERSION   = '0.05';
-@EXPORT    = qw(tainted taint untaint);
-@EXPORT_OK = @EXPORT;
+
+@EXPORT_OK{qw(tainted taint untaint)} = ();
+
+sub import
+{
+    shift;
+    my $caller = caller;
+    for (@_ ? @_ : keys %EXPORT_OK)
+    {
+        die qq["$_" is not exported by the @{[__PACKAGE__]} module"]
+            unless exists $EXPORT_OK{$_};
+        *{"$caller\::$_"} = \&$_;
+    }
+}
 
 XSLoader::load __PACKAGE__, $VERSION;
 
