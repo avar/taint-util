@@ -19,7 +19,8 @@ PREINIT:
     I32 i;
 PPCODE:
     for (i = 0; i < items; ++i)
-        SvTAINTED_on(ST(i));
+        if (!SvREADONLY(ST(i)))
+            SvTAINTED_on(ST(i));
 
 void
 untaint(...)
