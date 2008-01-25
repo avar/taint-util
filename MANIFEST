@@ -1,7 +1,6 @@
 ChangeLog
 Makefile.PL
 MANIFEST			This list of files
-META.yml
 t/00-compile.t
 t/export.t
 t/prototype.t
