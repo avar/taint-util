@@ -30,7 +30,7 @@ ok !tainted("goood") => "constant not tainted";
     local $@;
     eval { taint("bewbs") };
     my $err = $@; chomp $err; # Don't put \n in TAP output
-    like $err, qr/read-only/ => "$err";
+    ok(!$@, "We don't attempt to taint constants");
 }
 
 #
