@@ -150,8 +150,15 @@ while (<DATA>) {
 
 taint(my $str = "bewbs");
 ok tainted($str) => "New scalar tainted";
-my $re = qr/$str/;
-ok tainted($re) => "qr// tainted";
+
+if ($] < 5.008) {
+  SKIP: {
+    skip "qr// tainted is known to fail on 5.6.2 and below" => 1;
+  }
+} else {
+    my $re = qr/$str/;
+    ok tainted($re) => "qr// tainted";
+}
 
 __DATA__
 bax
