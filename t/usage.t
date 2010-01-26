@@ -1,7 +1,7 @@
 #!/usr/bin/perl -T
 use strict;
 
-use Test::More tests => 72;
+use Test::More tests => 74;
 use Taint::Util;
 
 # untainted
@@ -115,7 +115,10 @@ ok !tainted($_) => "ARRAY element $_ untainted" for @$ar;
 # CODE
 ok !tainted($cr) => "CODE untainted";
 taint($cr);
-ok tainted($cr) => "CODE untainted";
+ok tainted($cr) => "CODE tainted";
+ok tainted("$cr") => '"CODE" tainted';
+ok !tainted($cr->()) => 'CODE->() untainted';
+
 
 # GLOB
 ok !tainted(*$gr) => "*STDIN untainted";
