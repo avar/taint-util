@@ -22,21 +22,21 @@
   	of stringified objects
 	* Util.pm: Minor rewording in POD
 	* ChangeLog: s/Usage\.(pm|xs)/Util.$1/g
-	
+
 2007-03-17 Ævar Arnfjörð Bjarmason <avar@cpan.org> (0.03)
 
 	* t/usage.t: A lot more tests
 	* t/prototype.t: New tests for prototypes
 	* Util.xs: Support multiple arguments to taint/untaint
 	* Util.pm: Expanded a lot on the documentation
-	
+
 2007-03-14 Ævar Arnfjörð Bjarmason <avar@cpan.org> (0.02)
-	
+
 	* Util.pm: Re-worded and added to the POD
 	* ChangeLog: Added a changelog file
 	* Makefile.PL: Explicitly get version from Util.pm
 
 2007-03-14 Ævar Arnfjörð Bjarmason <avar@cpan.org> (0.01)
-	
+
 	* Initial release
-	
+
