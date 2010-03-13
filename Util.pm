@@ -96,8 +96,7 @@ ways for shooting yourself in the foot.
 
 Tainting in Perl was always meant to be used for potentially hostile
 external data passed to the program. Perl is passed a soup of strings
-from the outside it never receives any complex datatypes datatypes
-directly.
+from the outside; it never receives any complex datatypes directly.
 
 For instance you might get tainted hash keys in C<%ENV> or tainted
 strings from C<*STDIN> but you'll never get a tainted Hash reference
@@ -107,11 +106,11 @@ with IO and string operations. For example the C<ucfirst> function
 will manually set a tainted flag on its newly created string depending
 on whether the original was tainted or not.
 
-However since Taint::Util is exposing some of perl's guts via things
-get more complex. Internally tainting is implemented via perl's MAGIC
+However since Taint::Util is exposing some of perl's guts things get
+more complex. Internally tainting is implemented via perl's MAGIC
 facility which allows you to attach attach magic to any scalar, but
-because perl would never taint just any scalar not there to back you
-up if you do.
+since perl doesn't liberally taint scalars it's there to back you up
+if you do.
 
 You can C<taint(*DATA)> for and C<tainted(*DATA)> will subsequently be
 true but if you read from the filehandle via C<< <DATA> >> you'll get
