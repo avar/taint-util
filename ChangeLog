@@ -1,7 +1,7 @@
 2010-03-12  Ævar Arnfjörð Bjarmason  <avar@cpan.org> (0.07)
 
 	* Util.pm: A new POD section titled "About tainting in Perl"
-	inspired by RT#53988
+	inspired by RT#53988. Grammar fixes by Chris Nehren
 	* t/usage.t: Skip the qr// test known to fail on <5.6.2
 	* t/usage.t: Test for $code and $code->() taintedness
 	* Makefile.PL: Removed in the repository in favour of
