@@ -112,13 +112,12 @@ facility, which allows you to attach attach magic to any scalar, but
 since perl doesn't liberally taint scalars it's there to back you up
 if you do.
 
-                        vvv for what?
-You can C<taint(*DATA)> for and C<tainted(*DATA)> will subsequently be
+You can C<taint(*DATA)> and C<tainted(*DATA)> will subsequently be
 true but if you read from the filehandle via C<< <DATA> >> you'll get
-untainted data back.
+untainted data back. As you might have guessed this is completely
+useless.
 
-The test file F<t/usage.t> highlights some of these edge cases and
-their relative uselessness.
+The test file F<t/usage.t> highlights some of these edge cases.
 
 Back in the real world, the only reason tainting makes sense is because
 perl will back you up when you use it, e.g. it will slap your hand if
