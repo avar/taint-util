@@ -88,6 +88,55 @@ next section for details.
     taint(*DATA);    # *DATA tainted
     my $ln = <DATA>; # $ln not tainted
 
+=head1 About tainting in Perl
+
+Since this module is a low level interface that directly exposes the
+internal C<SvTAINTED*> functions it also presents new and exciting
+ways for shooting yourself in the foot.
+
+Tainting in Perl was always meant to be used for potentially hostile
+external data passed to the program. Perl is passed a soup of strings
+from the outside it never receives any complex datatypes datatypes
+directly.
+
+For instance you might get tainted hash keys in C<%ENV> or tainted
+strings from C<*STDIN> but you'll never get a tainted Hash reference
+or a tainted subroutine. Internally the perl compiler sets the taint
+flag on external data in a select few functions mainly having to do
+with IO and string operations. For example the C<ucfirst> function
+will manually set a tainted flag on its newly created string depending
+on whether the original was tainted or not.
+
+However since Taint::Util is exposing some of perl's guts via things
+get more complex. Internally tainting is implemented via perl's MAGIC
+facility which allows you to attach attach magic to any scalar, but
+because perl would never taint just any scalar not there to back you
+up if you do.
+
+You can C<taint(*DATA)> for and C<tainted(*DATA)> will subsequently be
+true but if you read from the filehandle via C<< <DATA> >> you'll get
+untainted data back.
+
+The test file F<t/usage.t> highlights some of these edge cases and
+their relative uselessness.
+
+Back in the real world the only reason tainting makes sense is because
+perl will back you up when you use it, e.g. it will slap your hand if
+you try to pass a tainted value to system().
+
+If you taint references perl doesn't offer that protection because it
+doesn't know anything about tainted references since it would never
+create one. The things that do work like the stringification of
+C<taint($t = [])> (i.e. C<ARRAY(0x11a5d48)>) being tainted only work
+incidentally.
+
+But I'm not going to stop you (L<Taint> will) by all means, have at
+it! Just don't expect it to do anything more useful than warming up
+your computer.
+
+See L<RT #53988|https://rt.cpan.org/Ticket/Display.html?id=53988> for
+the bug that inspired this section.
+
 =head1 EXPORTS
 
 Exports C<tainted>, C<taint> and C<untaint> by default. Individual
