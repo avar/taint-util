@@ -1,8 +1,6 @@
 package Taint::Util;
 use XSLoader ();
 
-$VERSION   = '0.06';
-
 @EXPORT_OK{qw(tainted taint untaint)} = ();
 
 sub import
