@@ -98,20 +98,21 @@ Tainting in Perl was always meant to be used for potentially hostile
 external data passed to the program. Perl is passed a soup of strings
 from the outside; it never receives any complex datatypes directly.
 
-For instance you might get tainted hash keys in C<%ENV> or tainted
-strings from C<*STDIN> but you'll never get a tainted Hash reference
-or a tainted subroutine. Internally the perl compiler sets the taint
+For instance, you might get tainted hash keys in C<%ENV> or tainted
+strings from C<*STDIN>, but you'll never get a tainted Hash reference
+or a tainted subroutine. Internally, the perl compiler sets the taint
 flag on external data in a select few functions mainly having to do
-with IO and string operations. For example the C<ucfirst> function
+with IO and string operations. For example, the C<ucfirst> function
 will manually set a tainted flag on its newly created string depending
 on whether the original was tainted or not.
 
-However since Taint::Util is exposing some of perl's guts things get
-more complex. Internally tainting is implemented via perl's MAGIC
-facility which allows you to attach attach magic to any scalar, but
+However, since Taint::Util is exposing some of perl's guts, things get
+more complex. Internally, tainting is implemented via perl's MAGIC
+facility, which allows you to attach attach magic to any scalar, but
 since perl doesn't liberally taint scalars it's there to back you up
 if you do.
 
+                        vvv for what?
 You can C<taint(*DATA)> for and C<tainted(*DATA)> will subsequently be
 true but if you read from the filehandle via C<< <DATA> >> you'll get
 untainted data back.
@@ -119,17 +120,17 @@ untainted data back.
 The test file F<t/usage.t> highlights some of these edge cases and
 their relative uselessness.
 
-Back in the real world the only reason tainting makes sense is because
+Back in the real world, the only reason tainting makes sense is because
 perl will back you up when you use it, e.g. it will slap your hand if
 you try to pass a tainted value to system().
 
-If you taint references perl doesn't offer that protection because it
+If you taint references, perl doesn't offer that protection, because it
 doesn't know anything about tainted references since it would never
 create one. The things that do work like the stringification of
 C<taint($t = [])> (i.e. C<ARRAY(0x11a5d48)>) being tainted only work
 incidentally.
 
-But I'm not going to stop you (L<Taint> will) by all means, have at
+But I'm not going to stop you (L<Taint> will). By all means, have at
 it! Just don't expect it to do anything more useful than warming up
 your computer.
 
