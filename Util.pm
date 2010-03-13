@@ -129,9 +129,8 @@ create one. The things that do work like the stringification of
 C<taint($t = [])> (i.e. C<ARRAY(0x11a5d48)>) being tainted only work
 incidentally.
 
-But I'm not going to stop you (L<Taint> will). By all means, have at
-it! Just don't expect it to do anything more useful than warming up
-your computer.
+But I'm not going to stop you. By all means, have at it! Just don't
+expect it to do anything more useful than warming up your computer.
 
 See L<RT #53988|https://rt.cpan.org/Ticket/Display.html?id=53988> for
 the bug that inspired this section.
