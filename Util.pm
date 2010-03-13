@@ -78,11 +78,12 @@ C<< qr// >> stringifies to.
 This does not mean that tainted blessed objects with overloaded
 stringification via L<overload> need return a tainted object since
 those objects may return a non-tainted scalar when stringified (see
-F<t/reftaint.t> for an example). The internal handling of C<< qr// >>
+F<t/usage.t> for an example). The internal handling of C<< qr// >>
 however ensures that this holds true.
 
-File handles can also be tainted, but this probably useless as the
-handle itself and not lines retrieved from it will be tainted.
+File handles can also be tainted, but this is pretty useless as the
+handle itself and not lines retrieved from it will be tainted, see the
+next section for details.
 
     taint(*DATA);    # *DATA tainted
     my $ln = <DATA>; # $ln not tainted
