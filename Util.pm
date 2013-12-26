@@ -63,7 +63,7 @@ tainted, see L<perlsec>). Returns no value (which evaluates to false).
     taint(my @hlagh = qw(a o e u)); # elements of @hlagh now tainted
 
 References (being scalars) can also be tainted, a stringified
-reference reference raises an error where a tainted scalar would:
+reference raises an error where a tainted scalar would:
 
     taint(my $ar = \@hlagh);
     system echo => $ar;      # err: Insecure dependency in system
@@ -108,7 +108,7 @@ on whether the original was tainted or not.
 
 However, since Taint::Util is exposing some of perl's guts, things get
 more complex. Internally, tainting is implemented via perl's MAGIC
-facility, which allows you to attach attach magic to any scalar, but
+facility, which allows you to attach magic to any scalar, but
 since perl doesn't liberally taint scalars it's there to back you up
 if you do.
 
